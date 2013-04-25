@@ -8,6 +8,7 @@
 
 <body>
 <?php
+
 include 'mysqlcon.php';
 if ($_GET["addedit"] === "Add")
         {
@@ -18,19 +19,13 @@ if ($_GET["addedit"] === "Add")
          else
           { 
             $mactionphp ="update.php";
+             $result1 = mysqli_query($con,"SELECT * FROM staff WHERE code =". $_GET['mcode'] );
+
+             $row1 = mysqli_fetch_array($result1);
+             $mname = $row1['name'];
+             $mcode = $row1['code'];
            
           } 
-if ($_GET["addedit"] === "Edit")
-{
-  $result1 = mysqli_query($con,"SELECT * FROM staff WHERE code =". $_GET['mcode'] );
-
-while($row1 = mysqli_fetch_array($result1))
-  {
-   $mname = $row1['name'];
-   $mcode = $row1['code'];
-  }
-}
-
  
 
 ?>

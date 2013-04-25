@@ -1,11 +1,6 @@
 
 <?php
-$con=mysqli_connect("localhost","root","","testdb");
-// Check connection
-if (mysqli_connect_errno())
-  {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  }
+include 'mysqlcon.php';
 
 		$sql="UPDATE staff SET code='$_POST[code]',name='$_POST[name]' WHERE code='$_POST[code]'";
 		if (!mysqli_query($con,$sql))
