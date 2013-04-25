@@ -8,17 +8,27 @@
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.min.css">
 	<script>
     function validateForm()
-	{  
-		var mname    =document.forms["entryfrm"]["name"].value;
-		if (mname==null || mname=="")
-  		{
-  		alert("Name must be filled out");
-  		document.getElementById('name').focus();
-  		return false;
+	  {  
+		  var mname    =document.forms["entryfrm"]["name"].value;
+		  if (mname==null || mname=="")
+  	 	{
+  	   	alert("Name must be filled out");
+  	   	document.getElementById('name').focus();
+  	   	return false;
   		}
   		
-	}
+	  }
+    function clearfield()
+    {  
+      document.getElementById('code').value="";
+      document.getElementById('name').value="";
+    }
+ //   function readfield()
+  //  {
+   //   readfield.php;
+   // }
 	</script>	
+
 </head>	
 
 <body>
@@ -27,17 +37,16 @@
     <div class="row" style="margin:4%">
       <div class="span4" style="background-color:white">
         <h4 style="margin-left:2%">Entry Form</h4>
-         <form name="entryfrm" action="insert.php" method="post" style="margin:2%">
+        <form name="entryfrm" action="insert.php"  method="post" style="margin:2%">
           <p>
-            <input type="text" name="code" placeholder="Code">
+            <input type="text" name="code" id="code" placeholder="Code">
           </p>
           <p>
-            <input type="text" name="name" placeholder="Name">
-          </p>  
+            <input type="text" name="name" id="name" placeholder="Name">
+          </p>   
+          <button type="submit" id="save" class="btn btn-success btn-small">Save</button>   
 
-          <button type="submit" class="btn btn-info btn-small">Insert</button> 
-
-         </form> 
+        </form> 
       </div>
       <div class="span9">
          
