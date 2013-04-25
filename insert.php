@@ -14,4 +14,6 @@ $name = mysql_real_escape_string($_POST["name"]);
 	echo "1 record added";	
 
 mysqli_close($con);
+
+header('Location: index.php');
 ?>

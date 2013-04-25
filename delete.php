@@ -8,4 +8,6 @@ if (!mysqli_query($con,$sql))
 echo "Record Deleted";	
 
 mysqli_close($con);
+
+header('Location: index.php');
 ?>
