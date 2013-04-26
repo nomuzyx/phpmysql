@@ -4,12 +4,31 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css">
+
 </head>
 <body>
 <?php
 include 'mysqlcon.php';
+  $searchtype=$_POST['searchtype'];
+  $searchterm=$_POST['searchterm'];
 
-$result = mysqli_query($con,"SELECT * FROM staff");
+  $searchterm=trim($searchterm);
+
+  if (!$searchtype || !$searchterm)
+  {
+    echo"You have not entered search details. Please go back and try again.";
+    exit;
+  }
+  
+ // if (!get_magic_quotes_gpc())
+ // {
+    $searchtype= mysql_real_escape_string($searchtype);
+    $searchterm= mysql_real_escape_string($searchterm);
+ // }
+
+  $qry="SELECT * FROM staff WHERE ".$searchtype." like '%".$searchterm."%'";
+
+  $result = mysqli_query($con,$qry);
 
 ?>
 
@@ -18,7 +37,9 @@ $result = mysqli_query($con,"SELECT * FROM staff");
     		<div class="span5">
     			<a href="search.html">Search</a>  
   	  				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-  	  			<a href="entryform.php?addedit=Add">Add</a>
+  	  		<a href="entryform.php?addedit=Add">Add</a>
+              &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <a href="index.php">Go Back to Index</a>
   	  		</div>	
   	  		<div class="span7">		
     			
@@ -40,17 +61,16 @@ $result = mysqli_query($con,"SELECT * FROM staff");
 	</div> 
 </div>
 <?php
-
-while($row = mysqli_fetch_array($result))
-{
+  while($row = mysqli_fetch_array($result))
+  {
   echo "<tr>";
   echo "<td>" . $row['code'] . "</td>";
   echo "<td>" . $row['name'] . "</td>";
   echo '<td><a href="entryform.php?mcode='.$row['code'].'&addedit='."Edit".'">Edit</a></td>';
   echo '<td><a href="delete.php?mcode='.$row['code'].'">Delete</a> </td>';
   echo "</tr>";
-}
-echo "</table>";
+  }
+  echo "</table>";
 
 mysqli_close($con);
 ?>
